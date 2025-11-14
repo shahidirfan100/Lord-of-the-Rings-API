@@ -28,8 +28,8 @@ async function main() {
 
         // Set appropriate sort field based on entity
         let sortField = sort;
-        if (entity === 'quote' || entity === 'chapter') {
-            sortField = sort.replace('name', '_id'); // Quotes and chapters don't have name, use _id
+        if (entity !== 'character') {
+            sortField = sort.replace('name', '_id'); // Non-character entities don't support name sorting
         }
 
         // Hardcoded API key
@@ -282,17 +282,22 @@ async function transformItem(item, entity) {
                 death: item.death || null
             };
         case 'quote':
+            const [movieName, characterName] = await Promise.all([
+                fetchMovieName(item.movie),
+                fetchCharacterName(item.character)
+            ]);
             return {
                 ...baseItem,
                 dialog: item.dialog || null,
-                movie: item.movie || null,
-                character: item.character || null
+                movie: movieName,
+                character: characterName
             };
         case 'chapter':
+            const bookName = await fetchBookName(item.book);
             return {
                 ...baseItem,
                 chapterName: item.chapterName || null,
-                book: item.book || null
+                book: bookName
             };
         default:
             return baseItem;

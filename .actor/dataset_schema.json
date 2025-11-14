@@ -150,11 +150,11 @@
             "format": "text"
           },
           "movie": {
-            "label": "Movie ID",
+            "label": "Movie",
             "format": "text"
           },
           "character": {
-            "label": "Character ID",
+            "label": "Character",
             "format": "text"
           },
           "url": {
@@ -213,7 +213,7 @@
             "format": "text"
           },
           "book": {
-            "label": "Book ID",
+            "label": "Book",
             "format": "text"
           },
           "url": {
