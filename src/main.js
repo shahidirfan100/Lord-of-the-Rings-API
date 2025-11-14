@@ -1,6 +1,5 @@
 // Lord of the Rings API Scraper - API implementation
 import { Actor, log } from 'apify';
-import { Dataset } from 'crawlee';
 import { got } from 'got-scraping';
 
 // Single-entrypoint main
@@ -41,9 +40,10 @@ async function main() {
         let saved = 0;
         let page = 1;
 
-        log.info(`Starting scrape: entity=${entity}, limit=${LIMIT}, maxPages=${MAX_PAGES}`);
+        log.info(`Starting scrape: entity=${entity}, limit=${LIMIT}, maxPages=${MAX_PAGES}, total=${total}`);
 
         while (saved < total && page <= MAX_PAGES) {
+            log.info(`Starting page ${page}, saved so far: ${saved}`);
             // Build query parameters correctly
             const params = new URLSearchParams();
             
@@ -174,7 +174,7 @@ async function main() {
 
             let toSave = Math.min(transformedItems.length, total - saved);
             if (toSave > 0) {
-                await Dataset.pushData(transformedItems.slice(0, toSave));
+                await Actor.pushData(transformedItems.slice(0, toSave));
                 saved += toSave;
                 log.info(`✓ Page ${page}: Saved ${toSave} items. Total: ${saved}`);
             }
