@@ -12,8 +12,14 @@ async function main() {
         const {
             entity = 'character', limit: LIMIT_RAW = 100,
             maxPages: MAX_PAGES_RAW = 10, sort = 'name:asc',
-            characterFilters = {}, movieFilters = {}, quoteFilters = {},
-            chapterFilters = {}, customFilters = {}
+            characterName, characterRace, characterGender, characterBirth, characterDeath,
+            characterHair, characterRealm, characterHeight, characterSpouse,
+            movieName, movieRuntimeInMinutes, movieBudgetInMillions, movieBoxOfficeRevenueInMillions,
+            movieAcademyAwardNominations, movieAcademyAwardWins, movieRottenTomatoesScore,
+            quoteDialog, quoteMovie, quoteCharacter,
+            chapterName, chapterBook,
+            bookName,
+            customFilters = {}
         } = input;
 
         // Validate inputs
@@ -52,16 +58,36 @@ async function main() {
             
             switch (entity) {
                 case 'character':
-                    Object.assign(combinedFilters, characterFilters);
+                    if (characterName) combinedFilters.name = characterName;
+                    if (characterRace) combinedFilters.race = characterRace;
+                    if (characterGender) combinedFilters.gender = characterGender;
+                    if (characterBirth) combinedFilters.birth = characterBirth;
+                    if (characterDeath) combinedFilters.death = characterDeath;
+                    if (characterHair) combinedFilters.hair = characterHair;
+                    if (characterRealm) combinedFilters.realm = characterRealm;
+                    if (characterHeight) combinedFilters.height = characterHeight;
+                    if (characterSpouse) combinedFilters.spouse = characterSpouse;
                     break;
                 case 'movie':
-                    Object.assign(combinedFilters, movieFilters);
+                    if (movieName) combinedFilters.name = movieName;
+                    if (movieRuntimeInMinutes) combinedFilters.runtimeInMinutes = movieRuntimeInMinutes;
+                    if (movieBudgetInMillions) combinedFilters.budgetInMillions = movieBudgetInMillions;
+                    if (movieBoxOfficeRevenueInMillions) combinedFilters.boxOfficeRevenueInMillions = movieBoxOfficeRevenueInMillions;
+                    if (movieAcademyAwardNominations) combinedFilters.academyAwardNominations = movieAcademyAwardNominations;
+                    if (movieAcademyAwardWins) combinedFilters.academyAwardWins = movieAcademyAwardWins;
+                    if (movieRottenTomatoesScore) combinedFilters.rottenTomatoesScore = movieRottenTomatoesScore;
                     break;
                 case 'quote':
-                    Object.assign(combinedFilters, quoteFilters);
+                    if (quoteDialog) combinedFilters.dialog = quoteDialog;
+                    if (quoteMovie) combinedFilters.movie = quoteMovie;
+                    if (quoteCharacter) combinedFilters.character = quoteCharacter;
                     break;
                 case 'chapter':
-                    Object.assign(combinedFilters, chapterFilters);
+                    if (chapterName) combinedFilters.chapterName = chapterName;
+                    if (chapterBook) combinedFilters.book = chapterBook;
+                    break;
+                case 'book':
+                    if (bookName) combinedFilters.name = bookName;
                     break;
             }
             
