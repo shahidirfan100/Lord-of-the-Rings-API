@@ -9,6 +9,8 @@ await Actor.init();
 async function main() {
     try {
         const input = (await Actor.getInput()) || {};
+        log.info(`Input received: ${JSON.stringify(input)}`);
+        
         const {
             entity = 'character', limit: LIMIT_RAW = 100,
             maxPages: MAX_PAGES_RAW = 10, sort = 'name:asc',
@@ -28,6 +30,7 @@ async function main() {
 
         const LIMIT = Number.isFinite(+LIMIT_RAW) ? Math.max(1, Math.min(100, +LIMIT_RAW)) : 100;
         const MAX_PAGES = Number.isFinite(+MAX_PAGES_RAW) ? Math.max(1, +MAX_PAGES_RAW) : 10;
+        const total = LIMIT * MAX_PAGES;
 
         // Hardcoded API key
         const API_KEY = 'j-gsqpA6ER0VC67iTsD6';
@@ -40,7 +43,7 @@ async function main() {
 
         log.info(`Starting scrape: entity=${entity}, limit=${LIMIT}, maxPages=${MAX_PAGES}`);
 
-        while (saved < (LIMIT * MAX_PAGES) && page <= MAX_PAGES) {
+        while (saved < total && page <= MAX_PAGES) {
             // Build query parameters correctly
             const params = new URLSearchParams();
             
@@ -132,6 +135,8 @@ async function main() {
 
             // got-scraping with responseType: 'json' auto-parses
             const data = response.body;
+
+            log.info(`API response status: ${response.statusCode}, docs count: ${data.docs ? data.docs.length : 'N/A'}`);
 
             if (!data || typeof data !== 'object') {
                 throw new Error(`Invalid API response format: ${JSON.stringify(data)}`);
@@ -285,22 +290,17 @@ async function transformItem(item, entity) {
                 death: item.death || null
             };
         case 'quote':
-            const [movieName, characterName] = await Promise.all([
-                fetchMovieName(item.movie),
-                fetchCharacterName(item.character)
-            ]);
             return {
                 ...baseItem,
                 dialog: item.dialog || null,
-                movie: movieName,
-                character: characterName
+                movie: item.movie || null,
+                character: item.character || null
             };
         case 'chapter':
-            const bookName = await fetchBookName(item.book);
             return {
                 ...baseItem,
                 chapterName: item.chapterName || null,
-                book: bookName
+                book: item.book || null
             };
         default:
             return baseItem;
