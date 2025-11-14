@@ -56,42 +56,6 @@
       "description": "Filter characters by gender (Male, Female).",
       "editor": "textfield"
     },
-    "characterBirth": {
-      "title": "Character Birth",
-      "type": "string",
-      "description": "Filter characters by birth year or description.",
-      "editor": "textfield"
-    },
-    "characterDeath": {
-      "title": "Character Death",
-      "type": "string",
-      "description": "Filter characters by death year or description.",
-      "editor": "textfield"
-    },
-    "characterHair": {
-      "title": "Character Hair",
-      "type": "string",
-      "description": "Filter characters by hair color or description.",
-      "editor": "textfield"
-    },
-    "characterRealm": {
-      "title": "Character Realm",
-      "type": "string",
-      "description": "Filter characters by realm (e.g., The Shire, Rivendell).",
-      "editor": "textfield"
-    },
-    "characterHeight": {
-      "title": "Character Height",
-      "type": "string",
-      "description": "Filter characters by height.",
-      "editor": "textfield"
-    },
-    "characterSpouse": {
-      "title": "Character Spouse",
-      "type": "string",
-      "description": "Filter characters by spouse name.",
-      "editor": "textfield"
-    },
     "movieName": {
       "title": "Movie Name",
       "type": "string",
@@ -102,36 +66,6 @@
       "title": "Movie Runtime (minutes)",
       "type": "string",
       "description": "Filter movies by runtime in minutes.",
-      "editor": "textfield"
-    },
-    "movieBudgetInMillions": {
-      "title": "Movie Budget (millions)",
-      "type": "string",
-      "description": "Filter movies by budget in millions.",
-      "editor": "textfield"
-    },
-    "movieBoxOfficeRevenueInMillions": {
-      "title": "Movie Box Office Revenue (millions)",
-      "type": "string",
-      "description": "Filter movies by box office revenue in millions.",
-      "editor": "textfield"
-    },
-    "movieAcademyAwardNominations": {
-      "title": "Movie Academy Award Nominations",
-      "type": "string",
-      "description": "Filter movies by number of Academy Award nominations.",
-      "editor": "textfield"
-    },
-    "movieAcademyAwardWins": {
-      "title": "Movie Academy Award Wins",
-      "type": "string",
-      "description": "Filter movies by number of Academy Award wins.",
-      "editor": "textfield"
-    },
-    "movieRottenTomatoesScore": {
-      "title": "Movie Rotten Tomatoes Score",
-      "type": "string",
-      "description": "Filter movies by Rotten Tomatoes score.",
       "editor": "textfield"
     },
     "quoteDialog": {

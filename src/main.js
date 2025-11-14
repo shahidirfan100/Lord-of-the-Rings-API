@@ -12,10 +12,8 @@ async function main() {
         const {
             entity = 'character', limit: LIMIT_RAW = 100,
             maxPages: MAX_PAGES_RAW = 10, sort = 'name:asc',
-            characterName, characterRace, characterGender, characterBirth, characterDeath,
-            characterHair, characterRealm, characterHeight, characterSpouse,
-            movieName, movieRuntimeInMinutes, movieBudgetInMillions, movieBoxOfficeRevenueInMillions,
-            movieAcademyAwardNominations, movieAcademyAwardWins, movieRottenTomatoesScore,
+            characterName, characterRace, characterGender,
+            movieName, movieRuntimeInMinutes,
             quoteDialog, quoteMovie, quoteCharacter,
             chapterName, chapterBook,
             bookName,
@@ -61,21 +59,10 @@ async function main() {
                     if (characterName) combinedFilters.name = characterName;
                     if (characterRace) combinedFilters.race = characterRace;
                     if (characterGender) combinedFilters.gender = characterGender;
-                    if (characterBirth) combinedFilters.birth = characterBirth;
-                    if (characterDeath) combinedFilters.death = characterDeath;
-                    if (characterHair) combinedFilters.hair = characterHair;
-                    if (characterRealm) combinedFilters.realm = characterRealm;
-                    if (characterHeight) combinedFilters.height = characterHeight;
-                    if (characterSpouse) combinedFilters.spouse = characterSpouse;
                     break;
                 case 'movie':
                     if (movieName) combinedFilters.name = movieName;
                     if (movieRuntimeInMinutes) combinedFilters.runtimeInMinutes = movieRuntimeInMinutes;
-                    if (movieBudgetInMillions) combinedFilters.budgetInMillions = movieBudgetInMillions;
-                    if (movieBoxOfficeRevenueInMillions) combinedFilters.boxOfficeRevenueInMillions = movieBoxOfficeRevenueInMillions;
-                    if (movieAcademyAwardNominations) combinedFilters.academyAwardNominations = movieAcademyAwardNominations;
-                    if (movieAcademyAwardWins) combinedFilters.academyAwardWins = movieAcademyAwardWins;
-                    if (movieRottenTomatoesScore) combinedFilters.rottenTomatoesScore = movieRottenTomatoesScore;
                     break;
                 case 'quote':
                     if (quoteDialog) combinedFilters.dialog = quoteDialog;
