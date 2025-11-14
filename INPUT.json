@@ -1,0 +1,9 @@
+{
+  "entity": "character",
+  "limit": 50,
+  "maxPages": 5,
+  "sort": "name:asc",
+  "characterFilters": {
+    "race": "Hobbit"
+  }
+}

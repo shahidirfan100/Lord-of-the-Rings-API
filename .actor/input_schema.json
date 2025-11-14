@@ -1,0 +1,74 @@
+{
+  "title": "Lord of the Rings API Scraper",
+  "description": "Fetch comprehensive data from The One API to rule them all. Scrape books, movies, characters, quotes, and chapters from J.R.R. Tolkien's epic universe with advanced filtering and sorting options.",
+  "type": "object",
+  "schemaVersion": 1,
+  "properties": {
+    "entity": {
+      "title": "Entity Type",
+      "type": "string",
+      "description": "Choose which type of data to scrape from Tolkien's universe.",
+      "editor": "select",
+      "enum": ["book", "movie", "character", "quote", "chapter"],
+      "enumTitles": ["Books", "Movies", "Characters", "Quotes", "Chapters"],
+      "default": "character"
+    },
+    "limit": {
+      "title": "Results per page",
+      "type": "integer",
+      "description": "Number of results to fetch per API page (max 100).",
+      "minimum": 1,
+      "maximum": 100,
+      "default": 100,
+      "editor": "number"
+    },
+    "maxPages": {
+      "title": "Maximum pages to scrape",
+      "type": "integer",
+      "description": "Maximum number of API pages to fetch. Use higher values for complete datasets.",
+      "minimum": 1,
+      "default": 10,
+      "editor": "number"
+    },
+    "sort": {
+      "title": "Sort order",
+      "type": "string",
+      "description": "Sort results by field and direction (e.g., 'name:asc', 'runtimeInMinutes:desc').",
+      "editor": "select",
+      "enum": ["name:asc", "name:desc", "runtimeInMinutes:asc", "runtimeInMinutes:desc", "budgetInMillions:desc", "academyAwardWins:desc"],
+      "default": "name:asc"
+    },
+    "characterFilters": {
+      "title": "Character Filters",
+      "type": "object",
+      "description": "Filter characters by specific attributes (only used when entity is 'character').",
+      "editor": "json"
+    },
+    "movieFilters": {
+      "title": "Movie Filters",
+      "type": "object",
+      "description": "Filter movies by specific attributes (only used when entity is 'movie').",
+      "editor": "json"
+    },
+    "quoteFilters": {
+      "title": "Quote Filters",
+      "type": "object",
+      "description": "Filter quotes by specific attributes (only used when entity is 'quote').",
+      "editor": "json"
+    },
+    "chapterFilters": {
+      "title": "Chapter Filters",
+      "type": "object",
+      "description": "Filter chapters by specific attributes (only used when entity is 'chapter').",
+      "editor": "json"
+    },
+    "customFilters": {
+      "title": "Custom Filters",
+      "type": "object",
+      "description": "Advanced custom filters using MongoDB query syntax (e.g., {\"name\": \"/foot/i\", \"height\": {\"$exists\": true}}).",
+      "editor": "json"
+    }
+  },
+  "required": ["entity"],
+  "additionalProperties": true
+}

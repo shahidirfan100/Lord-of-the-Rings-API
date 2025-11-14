@@ -1,0 +1,231 @@
+{
+  "actorSpecification": 1,
+  "fields": {},
+  "views": {
+    "characters": {
+      "title": "Characters",
+      "transformation": {
+        "fields": [
+          "name",
+          "race",
+          "gender",
+          "height",
+          "hair",
+          "realm",
+          "birth",
+          "spouse",
+          "death",
+          "wikiUrl",
+          "url",
+          "source"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "Name",
+            "format": "text"
+          },
+          "race": {
+            "label": "Race",
+            "format": "text"
+          },
+          "gender": {
+            "label": "Gender",
+            "format": "text"
+          },
+          "height": {
+            "label": "Height",
+            "format": "text"
+          },
+          "hair": {
+            "label": "Hair",
+            "format": "text"
+          },
+          "realm": {
+            "label": "Realm",
+            "format": "text"
+          },
+          "birth": {
+            "label": "Birth",
+            "format": "text"
+          },
+          "spouse": {
+            "label": "Spouse",
+            "format": "text"
+          },
+          "death": {
+            "label": "Death",
+            "format": "text"
+          },
+          "wikiUrl": {
+            "label": "Wiki URL",
+            "format": "link"
+          },
+          "url": {
+            "label": "API URL",
+            "format": "link"
+          },
+          "source": {
+            "label": "Source",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "movies": {
+      "title": "Movies",
+      "transformation": {
+        "fields": [
+          "name",
+          "runtimeInMinutes",
+          "budgetInMillions",
+          "boxOfficeRevenueInMillions",
+          "academyAwardNominations",
+          "academyAwardWins",
+          "rottenTomatoesScore",
+          "url",
+          "source"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "Name",
+            "format": "text"
+          },
+          "runtimeInMinutes": {
+            "label": "Runtime (min)",
+            "format": "number"
+          },
+          "budgetInMillions": {
+            "label": "Budget ($M)",
+            "format": "number"
+          },
+          "boxOfficeRevenueInMillions": {
+            "label": "Box Office ($M)",
+            "format": "number"
+          },
+          "academyAwardNominations": {
+            "label": "Oscar Noms",
+            "format": "number"
+          },
+          "academyAwardWins": {
+            "label": "Oscar Wins",
+            "format": "number"
+          },
+          "rottenTomatoesScore": {
+            "label": "RT Score",
+            "format": "number"
+          },
+          "url": {
+            "label": "API URL",
+            "format": "link"
+          },
+          "source": {
+            "label": "Source",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "quotes": {
+      "title": "Quotes",
+      "transformation": {
+        "fields": [
+          "dialog",
+          "movie",
+          "character",
+          "url",
+          "source"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "dialog": {
+            "label": "Quote",
+            "format": "text"
+          },
+          "movie": {
+            "label": "Movie ID",
+            "format": "text"
+          },
+          "character": {
+            "label": "Character ID",
+            "format": "text"
+          },
+          "url": {
+            "label": "API URL",
+            "format": "link"
+          },
+          "source": {
+            "label": "Source",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "books": {
+      "title": "Books",
+      "transformation": {
+        "fields": [
+          "name",
+          "url",
+          "source"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "name": {
+            "label": "Name",
+            "format": "text"
+          },
+          "url": {
+            "label": "API URL",
+            "format": "link"
+          },
+          "source": {
+            "label": "Source",
+            "format": "text"
+          }
+        }
+      }
+    },
+    "chapters": {
+      "title": "Chapters",
+      "transformation": {
+        "fields": [
+          "chapterName",
+          "book",
+          "url",
+          "source"
+        ]
+      },
+      "display": {
+        "component": "table",
+        "properties": {
+          "chapterName": {
+            "label": "Chapter Name",
+            "format": "text"
+          },
+          "book": {
+            "label": "Book ID",
+            "format": "text"
+          },
+          "url": {
+            "label": "API URL",
+            "format": "link"
+          },
+          "source": {
+            "label": "Source",
+            "format": "text"
+          }
+        }
+      }
+    }
+  }
+}
