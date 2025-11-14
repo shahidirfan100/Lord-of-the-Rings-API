@@ -42,133 +42,133 @@
       "title": "Character Name",
       "type": "string",
       "description": "Filter characters by name (partial match, case-insensitive).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterRace": {
       "title": "Character Race",
       "type": "string",
       "description": "Filter characters by race (e.g., Hobbit, Elf, Man, Dwarf).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterGender": {
       "title": "Character Gender",
       "type": "string",
       "description": "Filter characters by gender (Male, Female).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterBirth": {
       "title": "Character Birth",
       "type": "string",
       "description": "Filter characters by birth year or description.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterDeath": {
       "title": "Character Death",
       "type": "string",
       "description": "Filter characters by death year or description.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterHair": {
       "title": "Character Hair",
       "type": "string",
       "description": "Filter characters by hair color or description.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterRealm": {
       "title": "Character Realm",
       "type": "string",
       "description": "Filter characters by realm (e.g., The Shire, Rivendell).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterHeight": {
       "title": "Character Height",
       "type": "string",
       "description": "Filter characters by height.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "characterSpouse": {
       "title": "Character Spouse",
       "type": "string",
       "description": "Filter characters by spouse name.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "movieName": {
       "title": "Movie Name",
       "type": "string",
       "description": "Filter movies by name (partial match).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "movieRuntimeInMinutes": {
       "title": "Movie Runtime (minutes)",
       "type": "string",
       "description": "Filter movies by runtime in minutes.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "movieBudgetInMillions": {
       "title": "Movie Budget (millions)",
       "type": "string",
       "description": "Filter movies by budget in millions.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "movieBoxOfficeRevenueInMillions": {
       "title": "Movie Box Office Revenue (millions)",
       "type": "string",
       "description": "Filter movies by box office revenue in millions.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "movieAcademyAwardNominations": {
       "title": "Movie Academy Award Nominations",
       "type": "string",
       "description": "Filter movies by number of Academy Award nominations.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "movieAcademyAwardWins": {
       "title": "Movie Academy Award Wins",
       "type": "string",
       "description": "Filter movies by number of Academy Award wins.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "movieRottenTomatoesScore": {
       "title": "Movie Rotten Tomatoes Score",
       "type": "string",
       "description": "Filter movies by Rotten Tomatoes score.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "quoteDialog": {
       "title": "Quote Dialog",
       "type": "string",
       "description": "Filter quotes by dialog text (partial match).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "quoteMovie": {
       "title": "Quote Movie",
       "type": "string",
       "description": "Filter quotes by movie name or ID.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "quoteCharacter": {
       "title": "Quote Character",
       "type": "string",
       "description": "Filter quotes by character name or ID.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "chapterName": {
       "title": "Chapter Name",
       "type": "string",
       "description": "Filter chapters by chapter name (partial match).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "chapterBook": {
       "title": "Chapter Book",
       "type": "string",
       "description": "Filter chapters by book name or ID.",
-      "editor": "text"
+      "editor": "textfield"
     },
     "bookName": {
       "title": "Book Name",
       "type": "string",
       "description": "Filter books by name (partial match).",
-      "editor": "text"
+      "editor": "textfield"
     },
     "customFilters": {
       "title": "Custom Filters",
