@@ -82,7 +82,7 @@ async function main() {
             if (combinedFilters && typeof combinedFilters === 'object') {
                 for (const [key, value] of Object.entries(combinedFilters)) {
                     if (value !== null && value !== undefined && value !== '') {
-                        params.append(key, `/${String(value)}/i`);
+                        params.append(key, String(value));
                     }
                 }
             }
