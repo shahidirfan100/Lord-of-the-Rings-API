@@ -82,7 +82,7 @@ async function main() {
             if (combinedFilters && typeof combinedFilters === 'object') {
                 for (const [key, value] of Object.entries(combinedFilters)) {
                     if (value !== null && value !== undefined && value !== '') {
-                        params.append(key, String(value));
+                        params.append(key, `/${String(value)}/i`);
                     }
                 }
             }
@@ -153,7 +153,7 @@ async function main() {
             const transformedItems = [];
             for (const item of items) {
                 try {
-                    const transformed = transformItem(item, entity);
+                    const transformed = await transformItem(item, entity);
                     if (transformed) {
                         transformedItems.push(transformed);
                     }
@@ -167,13 +167,15 @@ async function main() {
                 break;
             }
 
-            await Dataset.pushData(transformedItems);
-            saved += transformedItems.length;
+            let toSave = Math.min(transformedItems.length, total - saved);
+            if (toSave > 0) {
+                await Dataset.pushData(transformedItems.slice(0, toSave));
+                saved += toSave;
+                log.info(`✓ Page ${page}: Saved ${toSave} items. Total: ${saved}`);
+            }
 
-            log.info(`✓ Page ${page}: Saved ${transformedItems.length} items. Total: ${saved}`);
-
-            if (data.docs.length < perPage) {
-                log.info('Scraping complete - reached end of results');
+            if (toSave < transformedItems.length || data.docs.length < perPage) {
+                log.info('Scraping complete - reached limit or end of results');
                 break;
             }
 
@@ -192,7 +194,55 @@ async function main() {
 }
 
 // Transform item based on entity type
-function transformItem(item, entity) {
+// Helper functions to fetch related data
+async function fetchCharacterName(id) {
+    if (!id) return null;
+    try {
+        const url = `https://the-one-api.dev/v2/character/${id}`;
+        const response = await got(url, {
+            headers: { 'Authorization': `Bearer ${API_KEY}` },
+            responseType: 'json',
+            timeout: { request: 10000 }
+        });
+        return response.body.docs[0]?.name || null;
+    } catch (e) {
+        log.warning(`Failed to fetch character name for ${id}: ${e.message}`);
+        return null;
+    }
+}
+
+async function fetchMovieName(id) {
+    if (!id) return null;
+    try {
+        const url = `https://the-one-api.dev/v2/movie/${id}`;
+        const response = await got(url, {
+            headers: { 'Authorization': `Bearer ${API_KEY}` },
+            responseType: 'json',
+            timeout: { request: 10000 }
+        });
+        return response.body.docs[0]?.name || null;
+    } catch (e) {
+        log.warning(`Failed to fetch movie name for ${id}: ${e.message}`);
+        return null;
+    }
+}
+
+async function fetchBookName(id) {
+    if (!id) return null;
+    try {
+        const url = `https://the-one-api.dev/v2/book/${id}`;
+        const response = await got(url, {
+            responseType: 'json',
+            timeout: { request: 10000 }
+        });
+        return response.body.docs[0]?.name || null;
+    } catch (e) {
+        log.warning(`Failed to fetch book name for ${id}: ${e.message}`);
+        return null;
+    }
+}
+
+async function transformItem(item, entity) {
     if (!item || typeof item !== 'object') {
         throw new Error('Invalid item: expected object');
     }
@@ -235,17 +285,22 @@ function transformItem(item, entity) {
                 death: item.death || null
             };
         case 'quote':
+            const [movieName, characterName] = await Promise.all([
+                fetchMovieName(item.movie),
+                fetchCharacterName(item.character)
+            ]);
             return {
                 ...baseItem,
                 dialog: item.dialog || null,
-                movie: item.movie || null,
-                character: item.character || null
+                movie: movieName,
+                character: characterName
             };
         case 'chapter':
+            const bookName = await fetchBookName(item.book);
             return {
                 ...baseItem,
                 chapterName: item.chapterName || null,
-                book: item.book || null
+                book: bookName
             };
         default:
             return baseItem;

@@ -47,13 +47,13 @@
     "characterRace": {
       "title": "Character Race",
       "type": "string",
-      "description": "Filter characters by race (e.g., Hobbit, Elf, Man, Dwarf).",
+      "description": "Filter characters by race (partial match, e.g., Hobbit, Elf, Man, Dwarf).",
       "editor": "textfield"
     },
     "characterGender": {
       "title": "Character Gender",
       "type": "string",
-      "description": "Filter characters by gender (Male, Female).",
+      "description": "Filter characters by gender (partial match, Male, Female).",
       "editor": "textfield"
     },
     "movieName": {
@@ -65,7 +65,7 @@
     "movieRuntimeInMinutes": {
       "title": "Movie Runtime (minutes)",
       "type": "string",
-      "description": "Filter movies by runtime in minutes.",
+      "description": "Filter movies by runtime in minutes (partial match).",
       "editor": "textfield"
     },
     "quoteDialog": {
@@ -77,13 +77,13 @@
     "quoteMovie": {
       "title": "Quote Movie",
       "type": "string",
-      "description": "Filter quotes by movie name or ID.",
+      "description": "Filter quotes by movie name or ID (partial match).",
       "editor": "textfield"
     },
     "quoteCharacter": {
       "title": "Quote Character",
       "type": "string",
-      "description": "Filter quotes by character name or ID.",
+      "description": "Filter quotes by character name or ID (partial match).",
       "editor": "textfield"
     },
     "chapterName": {
@@ -95,7 +95,7 @@
     "chapterBook": {
       "title": "Chapter Book",
       "type": "string",
-      "description": "Filter chapters by book name or ID.",
+      "description": "Filter chapters by book name or ID (partial match).",
       "editor": "textfield"
     },
     "bookName": {
