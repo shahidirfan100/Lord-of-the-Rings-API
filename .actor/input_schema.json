@@ -13,21 +13,13 @@
       "enumTitles": ["Books", "Movies", "Characters", "Quotes", "Chapters"],
       "default": "character"
     },
-    "limit": {
-      "title": "Results per page",
+    "maxResults": {
+      "title": "Maximum Results",
       "type": "integer",
-      "description": "Number of results to fetch per API page (max 100).",
+      "description": "Maximum number of results to fetch across all pages.",
       "minimum": 1,
-      "maximum": 100,
+      "maximum": 1000,
       "default": 100,
-      "editor": "number"
-    },
-    "maxPages": {
-      "title": "Maximum pages to scrape",
-      "type": "integer",
-      "description": "Maximum number of API pages to fetch. Use higher values for complete datasets.",
-      "minimum": 1,
-      "default": 10,
       "editor": "number"
     },
     "sort": {
@@ -44,28 +36,10 @@
       "description": "Filter characters by name (substring match, case-insensitive).",
       "editor": "textfield"
     },
-    "characterRace": {
-      "title": "Character Race",
-      "type": "string",
-      "description": "Filter characters by race (substring match, e.g., Hobbit, Elf, Man, Dwarf).",
-      "editor": "textfield"
-    },
-    "characterGender": {
-      "title": "Character Gender",
-      "type": "string",
-      "description": "Filter characters by gender (substring match, Male, Female).",
-      "editor": "textfield"
-    },
     "movieName": {
       "title": "Movie Name",
       "type": "string",
       "description": "Filter movies by name (substring match).",
-      "editor": "textfield"
-    },
-    "movieRuntimeInMinutes": {
-      "title": "Movie Runtime (minutes)",
-      "type": "string",
-      "description": "Filter movies by runtime in minutes (substring match).",
       "editor": "textfield"
     },
     "quoteDialog": {
@@ -74,28 +48,10 @@
       "description": "Filter quotes by dialog text (substring match).",
       "editor": "textfield"
     },
-    "quoteMovie": {
-      "title": "Quote Movie",
-      "type": "string",
-      "description": "Filter quotes by movie name or ID (substring match).",
-      "editor": "textfield"
-    },
-    "quoteCharacter": {
-      "title": "Quote Character",
-      "type": "string",
-      "description": "Filter quotes by character name or ID (substring match).",
-      "editor": "textfield"
-    },
     "chapterName": {
       "title": "Chapter Name",
       "type": "string",
       "description": "Filter chapters by chapter name (substring match).",
-      "editor": "textfield"
-    },
-    "chapterBook": {
-      "title": "Chapter Book",
-      "type": "string",
-      "description": "Filter chapters by book name or ID (substring match).",
       "editor": "textfield"
     },
     "bookName": {

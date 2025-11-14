@@ -11,13 +11,8 @@ async function main() {
         log.info(`Input received: ${JSON.stringify(input)}`);
         
         const {
-            entity = 'character', limit: LIMIT_RAW = 100,
-            maxPages: MAX_PAGES_RAW = 10, sort = 'name:asc',
-            characterName, characterRace, characterGender,
-            movieName, movieRuntimeInMinutes,
-            quoteDialog, quoteMovie, quoteCharacter,
-            chapterName, chapterBook,
-            bookName,
+            entity = 'character', maxResults: MAX_RESULTS_RAW = 100, sort = 'name:asc',
+            characterName, movieName, quoteDialog, chapterName, bookName,
             customFilters = {}
         } = input;
 
@@ -27,22 +22,25 @@ async function main() {
             throw new Error(`Invalid entity: ${entity}. Must be one of: ${validEntities.join(', ')}.`);
         }
 
-        const LIMIT = Number.isFinite(+LIMIT_RAW) ? Math.max(1, Math.min(100, +LIMIT_RAW)) : 100;
-        const MAX_PAGES = Number.isFinite(+MAX_PAGES_RAW) ? Math.max(1, +MAX_PAGES_RAW) : 10;
-        const total = LIMIT * MAX_PAGES;
+        const MAX_RESULTS = Number.isFinite(+MAX_RESULTS_RAW) ? Math.max(1, Math.min(1000, +MAX_RESULTS_RAW)) : 100;
+        const perPage = Math.min(100, MAX_RESULTS); // Use up to 100 per page, but not more than needed
+        const maxPages = Math.ceil(MAX_RESULTS / perPage);
+
+        // Set appropriate sort field based on entity
+        let sortField = sort;
+        if (entity === 'quote' || entity === 'chapter') {
+            sortField = sort.replace('name', '_id'); // Quotes and chapters don't have name, use _id
+        }
 
         // Hardcoded API key
         const API_KEY = 'j-gsqpA6ER0VC67iTsD6';
 
         const baseUrl = `https://the-one-api.dev/v2/${entity}`;
-        const perPage = LIMIT; // Use the limit from input
 
         let saved = 0;
         let page = 1;
 
-        log.info(`Starting scrape: entity=${entity}, limit=${LIMIT}, maxPages=${MAX_PAGES}, total=${total}`);
-
-        while (saved < total && page <= MAX_PAGES) {
+        log.info(`Starting scrape: entity=${entity}, maxResults=${MAX_RESULTS}, perPage=${perPage}, maxPages=${maxPages}, sort=${sortField}`);        while (saved < MAX_RESULTS && page <= maxPages) {
             log.info(`Starting page ${page}, saved so far: ${saved}`);
             // Build query parameters correctly
             const params = new URLSearchParams();
@@ -50,8 +48,8 @@ async function main() {
             params.append('limit', perPage.toString());
             params.append('page', page.toString());
             
-            if (sort) {
-                params.append('sort', sort);
+            if (sortField) {
+                params.append('sort', sortField);
             }
             
             // Combine filters based on entity type
@@ -60,21 +58,15 @@ async function main() {
             switch (entity) {
                 case 'character':
                     if (characterName) combinedFilters.name = characterName;
-                    if (characterRace) combinedFilters.race = characterRace;
-                    if (characterGender) combinedFilters.gender = characterGender;
                     break;
                 case 'movie':
                     if (movieName) combinedFilters.name = movieName;
-                    if (movieRuntimeInMinutes) combinedFilters.runtimeInMinutes = movieRuntimeInMinutes;
                     break;
                 case 'quote':
                     if (quoteDialog) combinedFilters.dialog = quoteDialog;
-                    if (quoteMovie) combinedFilters.movie = quoteMovie;
-                    if (quoteCharacter) combinedFilters.character = quoteCharacter;
                     break;
                 case 'chapter':
                     if (chapterName) combinedFilters.chapterName = chapterName;
-                    if (chapterBook) combinedFilters.book = chapterBook;
                     break;
                 case 'book':
                     if (bookName) combinedFilters.name = bookName;
@@ -172,7 +164,7 @@ async function main() {
                 break;
             }
 
-            let toSave = Math.min(transformedItems.length, total - saved);
+            let toSave = Math.min(transformedItems.length, MAX_RESULTS - saved);
             if (toSave > 0) {
                 await Actor.pushData(transformedItems.slice(0, toSave));
                 saved += toSave;
@@ -187,7 +179,7 @@ async function main() {
             page++;
             
             // Add delay between requests to be polite
-            if (page <= MAX_PAGES) {
+            if (page <= maxPages) {
                 await new Promise(resolve => setTimeout(resolve, 1000));
             }
         }
